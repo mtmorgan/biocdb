@@ -1,0 +1,10 @@
+Package: txdb
+Version: 0.0.1
+Title: TranscriptDb Annotations via dplyr
+Authors@R person("Martin", "Morgan", role=c("aut", "cre"),
+    email="mtmorgan@fredhutch.org")
+Description: This package provides a dplyr-style interface to
+    Bioconductor TranscriptDb data bases for describing gene models.
+Depends: dplyr
+Imports: BiocInstaller
+License: Artistic-2.0
