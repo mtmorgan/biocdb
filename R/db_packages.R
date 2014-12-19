@@ -40,8 +40,9 @@ print.db_packages <-
     .printgrp <- function(x, key, n) {
         cat(key, "\n")
         for (i in seq_along(x[[key]])) {
-            if ((i != 1L) && (i %% n == 1L)) cat("\n")
             cat(x[[key]][[i]])
+            if ((i %% n == 0L) && (i != length(x[[key]])))
+                cat("\n")
         }
         cat("\n")
     }
