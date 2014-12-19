@@ -9,4 +9,5 @@ Description: This package provides a dplyr-style interface to
     Bioconductor TranscriptDb data bases for describing gene models.
 Depends: dplyr
 Imports: BiocInstaller
+Suggests: RMySQL
 License: Artistic-2.0

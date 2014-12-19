@@ -1,8 +1,8 @@
-ucsc <- function(prefix, dplyr=TRUE, ...)
+ucsc <- function(prefix="hg19", dplyr=TRUE, ...)
 {
-    if (dplyr)
-        src_mysql(user="genome", host="genome-mysql.cse.ucsc.edu",
-                  dbname=prefix)
-    else
-        stop("ucsc, dplyr=FALSE not yet implemented")
+    pkgs <- list(available=character(), installed=character())
+    idx <- ifelse(nzchar(system.file(package="RMySQL")),
+                  "installed", "available")
+    pkgs[[idx]] <- "RMySQL"
+    .db_get(pkgs, dplyr, ..., dbname=prefix)
 }

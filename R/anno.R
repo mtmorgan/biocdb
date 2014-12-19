@@ -1,9 +1,9 @@
 format.src_biocdb <-
     function(x, ...)
 {
-    paste0("class: ", class(x)[1], "\n",
+    paste0("class: ", paste0(class(x), collapse=" "), "\n",
            .ppath("path", x$path), "\n",
-           dplyr:::wrap("tbls: ", paste0(sort(src_tbls(x)), collapse = ", ")))
+           .ptbls(src_tbls(x)))
 }
 
 ## anno
@@ -16,7 +16,7 @@ anno <-
     pkgs <- .db_packages(prefix)
     if (.db_packages_exact_match(pkgs, prefix)) {
         pkgs <- .db_packages_filter(pkgs, prefix)
-        pkgs <- .get_db(pkgs, dplyr, ...)
+        pkgs <- .db_get(pkgs, dplyr, ...)
     }
     pkgs
 }

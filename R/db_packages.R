@@ -40,14 +40,15 @@ print.db_packages <-
     .printgrp <- function(x, key, n) {
         cat(key, "\n")
         for (i in seq_along(x[[key]])) {
-            if ((i != 1L) && (i %% n == 0)) cat("\n")
+            if ((i != 1L) && (i %% n == 1L)) cat("\n")
             cat(x[[key]][[i]])
         }
         cat("\n")
     }
-    wd <- max(nchar(unlist(x)))
-    n <- floor(getOption("width") / (wd + 4L))
-    fmt <- paste0("    %-", wd, "s")
+    elts <- unlist(unname(x))
+    wd <- if (length(elts)) max(nchar(elts)) else 0L
+    n <- floor(getOption("width") / (wd + 2L))
+    fmt <- paste0("  %-", wd, "s")
     x <- lapply(x, sprintf, fmt=fmt)
     key <- "installed"
     .printgrp(x, "available", n)
