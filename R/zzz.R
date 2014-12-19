@@ -1,6 +1,6 @@
 .ppath <- function(tag, filepath)
 {
-    wd <- options('width')[[1]] - nchar(tag) - 6
+    wd <- getOption("width") - nchar(tag) - 6
     if (0L == length(filepath) || nchar(filepath) < wd)
         return(sprintf("%s: %s\n", tag, filepath))
     bname <- basename(filepath)

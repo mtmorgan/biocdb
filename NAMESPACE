@@ -1,6 +1,6 @@
 importFrom(BiocInstaller, biocLite, biocinstallRepos)
-importFrom(dplyr, src_tbls, src_sqlite)
+importFrom(dplyr, src_sqlite, src_mysql, src_tbls)
 
-export(txdb)
+export(anno, ucsc)
 S3method(print, "db_packages")
-S3method(format, "src_txdb")
+S3method(format, "src_biocdb")
