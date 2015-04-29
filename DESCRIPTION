@@ -11,5 +11,5 @@ Description: This package provides an alternative approach to
     and ?ucsc provide illustration and additional detail.
 Depends: dplyr
 Imports: BiocInstaller
-Suggests: RMySQL
+Suggests: AnnotationDbi, RMySQL
 License: Artistic-2.0

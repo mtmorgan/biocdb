@@ -6,11 +6,17 @@
         biocLite(pkg, ...)
     } else pkg <- pkgs$installed
 
-    suppressPackageStartupMessages({
-        nmspc <- loadNamespace(pkg)
-    })
+    nmspc <- suppressPackageStartupMessages(tryCatch({
+        loadNamespace(pkg)
+    }, error=function(err) {
+        ## FIXME: this is here because Homo.sapiens & friends are not
+        ## able to loadNamespace()
+        require(pkg, character.only=TRUE)
+        getNamespace(pkg)
+    }))
 
     cls <- c(sub("([^.]+).*", "\\1", pkg), "biocdb")
+    cls <- sub("^(Homo|Mus|Rattus)", "Organism", cls)
     db <- NULL
     if (dplyr)
         db <- tryCatch({
@@ -20,7 +26,7 @@
             .dplyr_get(obj, pkg, nmspc, ..., dbname=dbname)
         }, error=function(e) {
             if (verbose)
-                message("...failed: ", conditionMessage(e))
+                message("... failed: ", conditionMessage(e))
             NULL
         })
     if (is.null(db))

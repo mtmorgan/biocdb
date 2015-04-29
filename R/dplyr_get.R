@@ -12,10 +12,17 @@
 .dplyr_get.src_org <-
     function(cls, pkg, nmspc, ...)
 {
-    fun <- sub(".db$", "_dbfile", pkg)
-    fname <- do.call(fun, list(), envir=nmspc)
+    fname <- AnnotationDbi::dbfile(nmspc[[pkg]])
     con <- src_sqlite(fname)
     structure(con, class=c(class(cls), class(con)))
+}
+
+.dplyr_get.src_Organism <-
+    function(cls, pkg, nmspc, ...)
+{
+    fnames <- AnnotationDbi::dbfile(nmspc[[pkg]])
+    con <- lapply(fnames, src_sqlite)
+    structure(con, class=c(class(cls), class(con[[1]])))
 }
 
 .dplyr_get.src_RMySQL <-

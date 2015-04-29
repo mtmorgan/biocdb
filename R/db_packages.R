@@ -1,6 +1,9 @@
 ## .db_packages
 
-.BIOCDB_RE <- "(org\\.|TxDb\\.|FDb\\.|BSgenome\\.|SNPlocs\\.)"
+.BIOCDB_RE <- sprintf("(%s)",
+    paste(c("org\\.", "TxDb\\.", "FDb\\.", "BSgenome\\.", "SNPlocs\\.",
+            "Homo.sapiens", "Mus.musculus", "Rattus.norvegicus"),
+          collapse="|"))
 
 .db_packages <-
     function(prefix)
