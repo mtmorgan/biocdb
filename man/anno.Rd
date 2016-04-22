@@ -9,7 +9,7 @@
 }
 
 \usage{
-anno(prefix, dplyr=TRUE, ...)
+anno(prefix, dplyr=FALSE, ...)
 }
 
 \arguments{
@@ -84,7 +84,7 @@ anno("TxDb")        # 'Transcript Db' (gene model) annotation packages
 \dontrun{
 ## unique match to TxDb.Dmelanogaster.UCSC.dm3.ensGene,
 ## package attached and interface returned
-d = anno("TxDb.Dmel")               # dplyr API
-d = anno("TxDb.Dmel", dplyr=FALSE)  # classic API
+d = anno("TxDb.Dmel")              # classic API
+d = anno("TxDb.Dmel", dplyr=TRUE)  # dplyr API
 }
 }

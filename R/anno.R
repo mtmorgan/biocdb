@@ -1,7 +1,7 @@
 ## anno
 
 anno <-
-    function(prefix, dplyr=TRUE, ...)
+    function(prefix, dplyr=FALSE, ...)
 {
     if (missing(prefix))
         prefix <- .BIOCDB_RE
