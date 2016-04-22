@@ -4,9 +4,10 @@
 \description{
 
   Use this function to discover, load, and use UCSC MySQL annotation
-  resources. The RMySQL package (typically requring installation of a
-  MySQL client and requiring advanced understanding on Windows, as
-  described in the RMySQL package INSTALL file).
+  resources. The \code{ucsc} function requires the RMySQL package
+  (typically requring installation of a MySQL client and requiring
+  advanced understanding on Windows, as described in the RMySQL package
+  INSTALL file).
 
 }
 
@@ -47,7 +48,5 @@ ucsc(prefix, dplyr=TRUE, ...)
 \author{Martin Morgan \url{mailto:mtmorgan@fredhutch.org}}
 
 \examples{
-\dontrun{
 ucsc("hg38")
-}
 }

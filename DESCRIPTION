@@ -1,5 +1,5 @@
 Package: biocdb
-Version: 0.0.3
+Version: 0.99.0
 Title: Bioconductor Annotation Packages via dplyr
 Authors@R: c(person("Martin", "Morgan", role=c("aut", "cre"),
     email="mtmorgan@fredhutch.org"))
@@ -9,7 +9,9 @@ Description: This package provides an alternative approach to
     discovering, installing, loading, and using Bioconductor and other
     (currently only UCSC) annotation resources. The man pages ?anno
     and ?ucsc provide illustration and additional detail.
+biocViews: Annotation
 Depends: dplyr
-Imports: BiocInstaller
-Suggests: AnnotationDbi, RMySQL
+Imports: BiocInstaller, utils
+Suggests: AnnotationDbi, RMySQL, BiocStyle, knitr, rmarkdown
+VignetteBuilder: knitr
 License: Artistic-2.0

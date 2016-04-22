@@ -1,5 +1,7 @@
 importFrom(BiocInstaller, biocLite, biocinstallRepos)
 importFrom(dplyr, src_sqlite, src_mysql, src_sql, src_tbls)
+importFrom(utils, available.packages, contrib.url, head,
+    installed.packages)
 
 export(anno, ucsc)
 S3method(print, "db_packages")
