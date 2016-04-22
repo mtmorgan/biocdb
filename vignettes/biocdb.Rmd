@@ -1,0 +1,102 @@
+---
+title: "Discovering Annotation Resources with _biocdb_"
+author: "Martin Morgan"
+output: 
+  BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Discovering Annotation Resources with biocdb}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+Edited: 22 April, 2016
+<br>Compiled: `r BiocStyle::doc_date()`
+
+# Overview
+
+This package provides functionality to easily discover _Bioconductor_
+'annotation' packages and UCSC annotation resources. The latter
+requires availability of the [RMySQL][1] package, and consequently a
+MySQL client.
+
+```{r setup}
+suppressPackageStartupMessages({
+   library(biocdb)
+})
+```
+
+The package depends on both [AnnotationDbi][3] and [dplyr][4]. These
+packages have some functions that are named the same but with
+different arguments and implementation; it is therefore often
+necessary to prefix functions with the name of the package, to
+disambiguate reference, e.g., `AnnotationDbi::select()`,
+`dplyr::select()`.
+
+# Discovering and using _Bioconductor_ annotation packages.
+
+Use `anno()` to discover _Bioconductor_ [annotation][2] packages. The
+functions primary argument, `prefix`, is a character(1) regular
+expression that restricts displayed packages. Packages are classified
+as 'installed' or 'available. The 'installed' packages are installed
+in current _R_ libraries (see `.libPaths()`). The 'available' packages
+can be installed via `anno()` (described later) or `biocLite()`.
+
+When `prefix` is missing, common annotation packages are
+discovered. These include packages whose names start with 'org',
+'TxDb', 'FDb', 'BSgenome', 'SNPlocs', as well as 'Homo.sapiens',
+'Mus.musculus', and 'Rattus.norvegicus'.
+
+```{r anno-1}
+pkgs <- anno()
+names(pkgs)
+sapply(pkgs, length)
+lapply(pkgs, head)
+```
+
+Specifying any prefix returns information on all packages with that
+prefix, providing an easy way to discover installed and / or available
+packages.
+
+```{r anno-TxDb}
+anno("TxDb")
+```
+
+If the prefix identifies a single package, then that package is
+attached to the current _R_ session, or if necessary installed (via
+`biocLite()`) and then attached. The return value is the symbol used
+to access data in the package or, if there is no such symbol, `NULL`.
+
+```{r anno-org.Hs.eg.db}
+db <- anno("org.Hs.eg")     # uniquely identifies org.Hs.eg.db
+db
+head(AnnotationDbi::keys(db))
+```
+
+Many _Bioconductor_ annotation packages are SQLite data bases. The
+argument `dplyr=TRUE` applied to these packages returns a dplyr object
+representing the data base.
+
+```{r anno-org.Hs.eg.db-dplyr}
+anno("TxDb.*dm6", dplyr=TRUE)
+```
+# Discovering and using UCSC MySQL resources
+
+The `ucsc()` function provides SQL-level access to UCSC SQL tables. It
+requires a MySQL client, and the [RMySQL][1] _R_ package. The UCSC
+genome browser web site includes [MySQL database descriptions][3]. A
+simple illustration retrieves tables for hg38; the return value is a
+dplyr database connection.
+
+```{r ucsc-hg38}
+db <- ucsc("hg38")
+db
+```
+
+# About this document
+
+```{r sessionInfo}
+sessionInfo()
+```
+
+[1]: https://cran.r-projec.org/package=RMySQL
+[2]: http://bioconductor.org/packages/release/BiocViews.html#___AnnotationData
+[3]: http://genome.ucsc.edu/goldenPath/help/mysql.html
