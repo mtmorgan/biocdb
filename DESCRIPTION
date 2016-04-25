@@ -1,8 +1,8 @@
 Package: biocdb
-Version: 0.99.1
+Version: 0.99.2
 Title: Bioconductor Annotation Packages via dplyr
 Authors@R: c(person("Martin", "Morgan", role=c("aut", "cre"),
-    email="mtmorgan@fredhutch.org"))
+    email="martin.morgan@RoswellPark.org"))
 Maintainer: Bioconductor Package Maintainer
     <maintainer@bioconductor.org>
 Description: This package provides an alternative approach to
